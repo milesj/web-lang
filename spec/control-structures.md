@@ -73,7 +73,7 @@ The `continue` statement will skip to the next item.
         }
     }
     
-And `else` block can be defined that will execute if the collection is empty.
+An `else` block can be defined that will execute if the collection is empty.
 
     for value in foo {
         // ...

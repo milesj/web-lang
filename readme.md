@@ -11,23 +11,23 @@ It is not an actual usable programming language. Simply thoughts in my head.
     * Literals
     * Variables
     * Constants 
-* Types
-    * Primitives
-        * Boolean
-        * Integers
-        * Floating Points 
-        * Strings
-    * Compounds
-        * Arrays
-        * Tuples
-        * Maps
-        * Structs
-        * Enums 
-    * Mutability
-    * Nullable
-    * Boxing
-    * Augmenting
-    * Pointers
+* [Types](spec/types.md)
+    * [Primitives](spec/types.md#primitives)
+        * [Boolean](spec/types.md#boolean)
+        * [Integers](spec/types.md#integers)
+        * [Floating Points](spec/types.md#floating-points)
+        * [Strings](spec/types.md#strings)
+    * [Compounds](spec/types.md#compounds)
+        * [Arrays](spec/types.md#arrays)
+        * [Tuples](spec/types.md#tuples)
+        * [Maps](spec/types.md#maps)
+        * [Structs](spec/types.md#structs)
+        * [Enums](spec/types.md#enums)
+    * [Inference](spec/types.md#inference)
+    * [Mutability](spec/types.md#mutability)
+    * [Nullable](spec/types.md#nullable)
+    * [Conversion](spec/types.md#conversion)
+    * [Augmenting](spec/types.md#augmenting)
 * Expressions
 * Operators
     * Ternary 
