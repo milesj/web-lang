@@ -5,30 +5,31 @@ and much more.
 The following specifications are proof of concept, and mainly define the syntax and some functionality. 
 It is not an actual usable programming language. Simply thoughts in my head.
 
-* Basics
-    * Identifiers
-    * Keywords
-    * Literals
-    * Variables
-    * Constants 
+* [Basics](spec/basics.md)
+    * [Identifiers](spec/basics.md#identifiers)
+    * [Keywords](spec/basics.md#keywords)
+    * [Literals](spec/basics.md#literals)
+    * [Variables](spec/basics.md#variables)
+    * [Constants](spec/basics.md#constants)
+    * [Expressions](spec/basics.md#expressions)
 * [Types](spec/types.md)
     * [Primitives](spec/types.md#primitives)
         * [Boolean](spec/types.md#boolean)
         * [Integers](spec/types.md#integers)
         * [Floating Points](spec/types.md#floating-points)
         * [Strings](spec/types.md#strings)
-    * [Compounds](spec/types.md#compounds)
+            * [Interpolation](spec/types.md#interpolation)
+    * [Collections](spec/types.md#collections)
         * [Arrays](spec/types.md#arrays)
         * [Tuples](spec/types.md#tuples)
         * [Maps](spec/types.md#maps)
         * [Structs](spec/types.md#structs)
         * [Enums](spec/types.md#enums)
-    * [Inference](spec/types.md#inference)
-    * [Mutability](spec/types.md#mutability)
-    * [Nullable](spec/types.md#nullable)
+    * [Type Inference](spec/types.md#type-inference)
+    * [Mutable Modifier](spec/types.md#mutable-modifier)
+    * [Nullable Modifier](spec/types.md#nullable-modifier)
     * [Conversion](spec/types.md#conversion)
     * [Augmenting](spec/types.md#augmenting)
-* Expressions
 * Operators
     * Ternary 
     * Null Coalesce

@@ -19,85 +19,85 @@ The following basic types are supported, coupled with their alias and class.
     <tbody>
         <tr>
             <td>object</td>
-            <td>system.Object</td>
+            <td>sys.Object</td>
             <td>Base type that all types extend from.</td>
             <td></td>
         </tr>
         <tr>
             <td>null</td>
-            <td>system.Null</td>
+            <td>sys.Null</td>
             <td>Absence of value.</td>
             <td></td>
         </tr>
         <tr>
             <td>bool</td>
-            <td>system.Boolean</td>
+            <td>sys.Boolean</td>
             <td>A true or false.</td>
             <td></td>
         </tr>
         <tr>
             <td>byte</td>
-            <td>system.Int8</td>
+            <td>sys.Int8</td>
             <td>8-bit signed integer.</td>
             <td>-128 to 127</td>
         </tr>
         <tr>
             <td>ubyte</td>
-            <td>system.UInt8</td>
+            <td>sys.UInt8</td>
             <td>8-bit unsigned integer.</td>
             <td>0 to 255</td>
         </tr>
         <tr>
             <td>short</td>
-            <td>system.Int16</td>
+            <td>sys.Int16</td>
             <td>16-bit signed integer.</td>
             <td>-32,768 to 32,767</td>
         </tr>
         <tr>
             <td>ushort</td>
-            <td>system.UInt16</td>
+            <td>sys.UInt16</td>
             <td>16-bit unsigned integer.</td>
             <td>0 to 65,535</td>
         </tr>
         <tr>
             <td>int</td>
-            <td>system.Int32</td>
+            <td>sys.Int32</td>
             <td>32-bit signed integer.</td>
             <td>-2,147,483,648 to 2,147,483,647</td>
         </tr>
         <tr>
             <td>uint</td>
-            <td>system.UInt32</td>
+            <td>sys.UInt32</td>
             <td>32-bit unsigned integer.</td>
             <td>0 to 4,294,967,295</td>
         </tr>
         <tr>
             <td>long</td>
-            <td>system.Int64</td>
+            <td>sys.Int64</td>
             <td>64-bit signed integer.</td>
             <td>–9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td>
         </tr>
         <tr>
             <td>ulong</td>
-            <td>system.UInt64</td>
+            <td>sys.UInt64</td>
             <td>64-bit unsigned integer.</td>
             <td>0 to 18,446,744,073,709,551,615</td>
         </tr>
         <tr>
             <td>float</td>
-            <td>system.Single</td>
+            <td>sys.Single</td>
             <td>32-bit floating-point.</td>
             <td>???</td>
         </tr>
         <tr>
             <td>double</td>
-            <td>system.Double</td>
+            <td>sys.Double</td>
             <td>64-bit floating-point.</td>
             <td>???</td>
         </tr>
         <tr>
             <td>string</td>
-            <td>system.String</td>
+            <td>sys.String</td>
             <td>Sequence of Unicode characters.</td>
             <td></td>
         </tr>
@@ -132,7 +132,9 @@ They are valid UTF-8 encoded sequences.
 
     string foo = 'Hello'
 
-Double quote strings can be used for interpolation as well as internal expressions.
+#### Interpolation ####
+
+Double quoted strings can be used for interpolation as well as internal expressions.
 
     string foo = 'World'
     string bar = "Hello {foo}"
@@ -141,12 +143,12 @@ Double quote strings can be used for interpolation as well as internal expressio
     bar // Hello World
     baz // 1 + 2 is 3
 
-## Compounds ##
+## Collections ##
 
-Compound types are more complex types, like collections. When declared, they either need to use [generics](generics.md), 
+Collections are complex types that manage a set of types. When declared, they either need to use [generics](generics.md), 
 or use [type inference](#inference) via the `let` keyword.
 
-The following compound types are supported.
+The following collection types are supported.
 
 <table>
     <thead>
@@ -159,27 +161,27 @@ The following compound types are supported.
     <tbody>
         <tr>
             <td>array</td>
-            <td>system.Array</td>
+            <td>sys.Array</td>
             <td>A variable length index based list.</td>
         </tr>
         <tr>
             <td>tuple</td>
-            <td>system.Tuple</td>
+            <td>sys.Tuple</td>
             <td>A fixed length ordered list.</td>
         </tr>
         <tr>
             <td>map</td>
-            <td>system.Map</td>
+            <td>sys.Map</td>
             <td>A variable length key-value map.</td>
         </tr>
         <tr>
             <td>struct</td>
-            <td>system.Struct</td>
+            <td>sys.Struct</td>
             <td>A fixed length key-value map.</td>
         </tr>
         <tr>
             <td>enum</td>
-            <td>system.Enum</td>
+            <td>sys.Enum</td>
             <td>A set of constant values.</td>
         </tr>
     </tbody>
@@ -192,7 +194,7 @@ Arrays are variable length lists of a specific type, with indices represented as
     Array<int> foo = [1, 2, 3]
     Array<string> bar = ['a', 'b', 'c']
     
-Using arrays is pretty similar to other languages. You can add an item.
+Using arrays are pretty similar to other languages. You can add an item.
 
     foo[] = 4
 
@@ -204,7 +206,7 @@ If an array is mutable, you can overwrite an item by index.
 
     foo[0] = 123
 
-A range of values (slices) can also be retrieved.
+And a range of values (slices) can be retrieved.
 
     foo[1:3]
     foo[-1]
@@ -277,7 +279,7 @@ Enums are very handy in comparisons.
         // ...
     }
 
-## Inference ##
+## Type Inference ##
 
 Type inference is a concept where a variables type will be automatically deduced when the type is omitted 
 from the declaration. To use type inference, use the `let` keyword.
@@ -290,7 +292,7 @@ The previous example is equivalent to this explicit declaration.
     byte foo = 123
     Map<byte, string> bar = {1: 'a', 2: 'b'}
 
-## Mutability ##
+## Mutable Modifier ##
 
 By default, all types are immutable when declared. If any mutation occurs, an exception is thrown. 
 There are 3 options for mutability. 
@@ -319,22 +321,21 @@ The `!` can be used with any type, even the `let` keyword. Take the following ex
     short! bar = -32,768
     Array<int>! baz = [1, 2, 3]
 
-## Nullable ##
+## Nullable Modifier ##
 
-All types are non-nullable by default.
+Primitive types do not support nullable values while collections do. Setting a non-nullable type to null 
+will throw an exception.
 
-    int foo = 123
-    foo = null // INVALID
+    Array<int> foo = null // INVALID
 
 To make a type nullable, append `?` to the type.
 
-    int? foo = 123
-    foo = null // VALID
+    Array<int>? foo = null // VALID
 
 Nullable can also be paired with mutable. The order of characters don't matter.
 
-    int!? foo = 123
-    int?! foo = 456
+    Array<int>!? foo = [123]
+    Array<int>?! foo = [456]
 
 ## Conversion ##
 
@@ -352,12 +353,11 @@ This is also known as boxing.
 
 ## Augmenting ##
 
-Augmenting is a concept that allows the extending of built-in type classes at runtime,
-like adding new methods.
+Augmenting is a concept that allows the extending of built-in type classes at runtime with new methods or properties.
 
 The following example uses [package](packages.md) and [class](classes.md) syntax.
 
-    import system.String
+    import sys.String
     
     augment String {
         string wrap(string name) {

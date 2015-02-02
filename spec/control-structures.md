@@ -4,6 +4,15 @@ All control structures are curly brace based.
 
 ## if, elif, else ##
 
+    STRUCTURE
+        if STATEMENT {
+        [ } elif STATEMENT { ]
+        [ } else { ]
+        }
+
+    STATEMENT
+        [ ( ] EXPRESSION [ ) ]
+
 The most basic form of an `if` `else` block.
 
     if (foo) {
@@ -28,6 +37,18 @@ The parenthesis in expressions are also optional.
 
 ## for ##
 
+    STRUCTURE
+        for STATEMENT in VARIABLE {
+        [ } else { ]
+        }
+
+    STATEMENT
+        VALUE |
+        KEY, VALUE
+
+    KEY, VALUE
+        Uses variable naming conventions.
+
 The `for` loop is used for iterating over collections, like arrays and maps.
 
     let foo = [1, 2, 3]
@@ -47,14 +68,8 @@ To access the key, separate with a comma.
 The `for` loop does not support the auto-incrementing form found in other languages, like C. 
 However, we can create a new range and loop that instead.
 
-    for i in 0..10 {
+    for i in Array.range(0, 10) {
         // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-    }
-    
-And with a step.
-
-    for i in 0..10:2 {
-        // 0, 2, 4, 6, 8, 10
     }
 
 The `break` statement will stop the loop.
@@ -83,6 +98,10 @@ An `else` block can be defined that will execute if the collection is empty.
 
 ## loop ##
 
+    STRUCTURE
+        loop {
+        }
+
 The popular `while` and `do-while` loops are not supported, instead we have a simple `loop`. 
 To exit the loop, call `break`.
 
@@ -98,10 +117,25 @@ This is the same as writing `while (true)`.
 
 ## match ##
 
+    STRUCTURE
+        match VARIABLE {
+            BLOCK
+            [ BLOCK ]
+            [ ... ]
+        [ } else { ]
+        }
+
+    BLOCK
+        STATEMENT {
+        }
+
+    STATEMENT
+        [ ( ] EXPRESSION[, EXPRESSION[, ... ]] [ ) ]
+
 The `match` block is similar to a switch case block, in that it executes different blocks based on a matching pattern.
 
     string var = 'foo'
-    
+
     match (var) {
         ('foo') { // ... }
         ('bar') { // ... }
@@ -142,6 +176,17 @@ If no match is found, an `else` block can be defined.
     }
 
 ## try, catch, finally ##
+
+    STRUCTURE
+        try {
+        } catch STATEMENT {
+        [ } catch STATEMENT { ]
+        [ ... ]
+        [ } finally { ]
+        }
+
+    STATEMENT
+        [ ( ] CLASS VARIABLE [ ) ]
 
 These blocks are used for handling exceptions.
 
