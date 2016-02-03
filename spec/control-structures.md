@@ -1,121 +1,148 @@
 # Control Structures #
 
-All control structures are curly brace based.
+Control structures are derived from C styled syntax and make use of curly braces.
 
-## if, elif, else ##
+## Conditional ##
+
+The flow of execution is handled by conditional branches (or blocks) through the evaluation of expressions.
+
+### Syntax ###
 
     STRUCTURE
-        if STATEMENT {
-        [ } elif STATEMENT { ]
+        if EXPRESSION {
+        [ } elif EXPRESSION { ]
         [ } else { ]
         }
 
-    STATEMENT
-        [ ( ] EXPRESSION [ ) ]
+    EXPRESSION
+        Refer to the expressions specification.
 
-The most basic form of an `if` `else` block.
+### If-Then Statement ###
 
-    if (foo) {
-        // ...
-    } else {
-        // ...
-    }
-    
-Else if blocks are also supported with `elif`.
+The most basic form is an `if` conditional block. If the expression evaluates to true, then the statement (body of the block) will be executed.
 
-    if (foo) {
-        // ...
-    } elif (bar) {
-        // ...
-    }
-    
-The parenthesis in expressions are also optional.
-
-    if foo and bar {
+    if foo {
         // ...
     }
 
-## for ##
+### Else-If-Then Statement ###
 
-    STRUCTURE
-        for STATEMENT in VARIABLE {
-        [ } else { ]
-        }
+Branching is made possible through `elif` conditional blocks, which evaluate sequentially.
 
-    STATEMENT
-        VALUE |
-        KEY, VALUE
-
-    KEY, VALUE
-        Uses variable naming conventions.
-
-The `for` loop is used for iterating over collections, like arrays and maps.
-
-    let foo = [1, 2, 3]
-    
-    for value in foo {
+    if foo {
+        // ...
+    } elif bar {
+        // ...
+    } elif baz {
         // ...
     }
-    
-To access the key, separate with a comma.
 
-    let bar = {1 => 'a', 2 => 'b', 3 => 'c'}
-    
-    for key, value in bar {
-        // ...
-    }
-    
-The `for` loop does not support the auto-incrementing form found in other languages, like C. 
-However, we can create a new range and loop that instead.
+### Else-Then Statement ###
 
-    for i in Array.range(0, 10) {
-        // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-    }
+When no conditions are met, then the `else` conditional block will be executed.
 
-The `break` statement will stop the loop.
-
-    for value in foo {
-        if (expression) {
-            break
-        }
-    }
-
-The `continue` statement will skip to the next item.
-
-    for value in foo {
-        if (expression) {
-            continue
-        }
-    }
-    
-An `else` block can be defined that will execute if the collection is empty.
-
-    for value in foo {
+    if foo {
         // ...
     } else {
         // ...
     }
 
-## loop ##
+## Iteration ##
+
+The continuous execution of a block or the iteration of an enumerable are handled by loop statements.
+
+### Syntax ###
 
     STRUCTURE
         loop {
         }
 
-The popular `while` and `do-while` loops are not supported, instead we have a simple `loop`. 
-To exit the loop, call `break`.
+        for VARIABLE in EXPRESSION {
+        [ } else { ]
+        }
+
+    VARIABLE
+        VALUE | KEY, VALUE
+        Refer to the variables specification.
+
+    KEY
+        The index or key of the current item within an iterable.
+
+    VALUE
+        The value of the current item within an iterable.
+
+    EXPRESSION
+        Refer to the expressions specification.
+
+### Loop Statement ###
+
+The popular `while` and `do-while` loops are not supported, instead we have a simple `loop` structure, which will continuously run until explicitly told to `stop`.
 
     loop {
         // ...
-        
-        if (expression) {
-            break
+
+        if expression {
+            stop
         }
     }
 
-This is the same as writing `while (true)`.
+This is the same as writing `while (true)` in other languages.
 
-## match ##
+### For-Loop Statement ###
+
+The `for` loop is used for iterating over enumerables, like collections.
+
+    for value in [1, 2, 3] {
+        // ...
+    }
+
+They current index or key of the item can be accessed by inserting an additional variable separated by a comma.
+
+    foo = { 1: 'a', 2: 'b', 3: 'c'}
+
+    for key, value in foo {
+        // ...
+    }
+
+An `else` block can be defined that will execute if the expression is false or empty.
+
+    for value in [] {
+        // ...
+    } else {
+        // ...
+    }
+
+#### Ranges ####
+
+The `for` loop does not support the auto-incrementing form found in other languages, like C. However, we can create a range and loop that instead.
+
+    for i in 0..10 {
+        // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    }
+
+### Flow Control ###
+
+The `stop` statement will stop the loop.
+
+    for value in foo {
+        if expression {
+            stop
+        }
+    }
+
+The `next` statement will skip to the next item.
+
+    for value in foo {
+        if expression {
+            next
+        }
+    }
+
+## Matching ##
+
+Pattern or value matching can be useful when bulk conditional execution is required.
+
+### Syntax ###
 
     STRUCTURE
         match VARIABLE {
@@ -125,39 +152,26 @@ This is the same as writing `while (true)`.
         [ } else { ]
         }
 
-    BLOCK
-        STATEMENT {
-        }
+    VARIABLE
+        Refer to the variables specification.
 
-    STATEMENT
-        [ ( ] EXPRESSION[, EXPRESSION[, ... ]] [ ) ]
+    BLOCK
+        EXPRESSION { }
+
+    EXPRESSION
+        VALUE[, VALUE[, ... ]]
+        Refer to the expressions specification.
+
+### Match Statement ###
 
 The `match` block is similar to a switch case block, in that it executes different blocks based on a matching pattern.
 
-    string var = 'foo'
-
-    match (var) {
-        ('foo') { // ... }
-        ('bar') { // ... }
-        ('baz') { // ... }
-    }
-
-This can be simplified by removing parenthesis.
+    var = 'foo'
 
     match var {
         'foo' { // ... }
         'bar' { // ... }
         'baz' { // ... }
-    }
-
-This is similar to writing this `if` block.
-
-    if var == 'foo' {
-        // ...
-    } elif var == 'bar' {
-        // ...
-    } elif var == 'baz' {
-        // ...
     }
 
 Multiple patterns are separated with a comma.
@@ -167,7 +181,7 @@ Multiple patterns are separated with a comma.
         'baz' { // ... }
     }
 
-If no match is found, an `else` block can be defined.
+When no match is found, then the `else` block will be executed. This can be used as the `default` case found in other languages.
 
     match var {
         // ...
@@ -175,43 +189,23 @@ If no match is found, an `else` block can be defined.
         // ...
     }
 
-## try, catch, finally ##
+#### Variable & Reference Matching ####
 
-    STRUCTURE
-        try {
-        } catch STATEMENT {
-        [ } catch STATEMENT { ]
-        [ ... ]
-        [ } finally { ]
-        }
+Variables can also be used within the expression portion of the `match` statement.
 
-    STATEMENT
-        [ ( ] CLASS VARIABLE [ ) ]
+    foo = 123
+    bar = 456
 
-These blocks are used for handling exceptions.
-
-    try {
-        // ...
-    } catch (Exception e) {
-        // ...
+    match 456 {
+        foo { // ... }
+        bar { // ... }
     }
 
-The `finally` block is used for always executing code.
+#### Pattern Matching ###
 
-    try {
-        // ...
-    } catch (Exception e) {
-        // ...
-    } finally {
-        // ...
-    }
+Patterns via regular expressions are also supported.
 
-Multiple exceptions can also be caught.
-
-    try {
-        // ...
-    } catch (FooException e) {
-        // ...
-    } catch (BarException e) {
-        // ...
+    match var {
+        `^foo` { // ... }
+        `bar$` { // ... }
     }
