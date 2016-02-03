@@ -123,16 +123,7 @@ Floating points are approximated numbers that have radix points of a variable si
 Strings are a sequence of zero or more Unicode characters that are initialized using single or double quotes. They are valid UTF-8 encoded sequences.
 
     foo = 'Hello'
-
-#### Interpolation ####
-
-    foo = 'World'
-    bar = "Hello #{foo}"
-    baz = "1 + 2 is #{1 + 2}"
-
-#### Concatenation ####
-
-    foo = "Hello" + " World"
+    bar = "World"
 
 ## Collections ##
 
@@ -217,15 +208,6 @@ Enums are a set of identifiers that are always constant once declared. Identifie
     }
 
     foo = Color.RED
-
-## Annotations ##
-
-By default, all variable types are inferred upon declaration. To define explicit types, we can use type annotations, which use [generics](generics.md) styled syntax.
-
-    foo<byte> = 100
-    bar<float> = 1252.42
-    baz<string> = "Hello World"
-    qux<Array<int>> = [1, 2, 3]
 
 ## Conversion ##
 
