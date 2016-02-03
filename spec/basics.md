@@ -52,11 +52,6 @@ it cannot start with a number. Variable names are also case sensitive and suppor
     string 123foo = '' // INVALID
     string foo-BAR = '' // INVALID
 
-[Mutable](types.md#mutable-modifier) and [nullable](types.md#nullable-modifier) modifiers are represented by `!` and `?`,
-and are declared after the type.
-
-    string foo?! = ''
-
 ## Constants ##
 
     DECLARATION

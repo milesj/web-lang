@@ -1,9 +1,6 @@
-This specification is for a programming language designed for the web, specifically HTTP. The language aims to be 
-object oriented, immutable, strongly typed, memory safe, garbage collected, statically typed via JIT or AOT compilation, 
-and much more. 
+This specification is for a programming language designed for the web, specifically HTTP, that runs on both the frontend and backend. The language aims to be object oriented through classes, interfaces, and traits, strongly typed with static-type checking at compile time, memory safe coupled with immutable only data structures and types, and much more.
 
-The following specifications are proof of concept, and mainly define the syntax and some functionality. 
-It is not an actual usable programming language. Simply thoughts in my head.
+The following specifications are proof of concept, which mainly define the syntax and some functionality. It is not an actual usable programming language. Simply thoughts in my head.
 
 * [Basics](spec/basics.md)
     * [Identifiers](spec/basics.md#identifiers)
@@ -19,20 +16,17 @@ It is not an actual usable programming language. Simply thoughts in my head.
         * [Floating Points](spec/types.md#floating-points)
         * [Strings](spec/types.md#strings)
             * [Interpolation](spec/types.md#interpolation)
+            * [Concatenation](spec/types.md#concatenation)
     * [Collections](spec/types.md#collections)
         * [Arrays](spec/types.md#arrays)
         * [Tuples](spec/types.md#tuples)
         * [Maps](spec/types.md#maps)
         * [Structs](spec/types.md#structs)
         * [Enums](spec/types.md#enums)
-    * [Type Inference](spec/types.md#type-inference)
-    * [Mutable Modifier](spec/types.md#mutable-modifier)
-    * [Nullable Modifier](spec/types.md#nullable-modifier)
+    * [Annotations](spec/types.md#annotations)
     * [Conversion](spec/types.md#conversion)
-    * [Augmenting](spec/types.md#augmenting)
 * Operators
-    * Ternary 
-    * Null Coalesce
+    * Ternary
 * [Control Structures](spec/control-structures.md)
     * [if, elif, else](spec/control-structures.md#if-elif-else)
     * [for](spec/control-structures.md#for)

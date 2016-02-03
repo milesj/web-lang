@@ -1,7 +1,8 @@
 # Types #
 
-All types are immutable objects that contain a value. All mutations and aggregations will return a new instance with the
-new value. If a type needs to be mutated in place, it will need to be unlocked or cloned.
+All types are immutable data structures that contain a value(s). Types can either be defined explicitly using generics, or implicitly through deference (default).
+
+Furthermore, all types (and variables) are strictly immutable. Any "mutation" returns a new instance with the value being cloned and modified in the process.
 
 ## Primitives ##
 
@@ -21,12 +22,6 @@ The following basic types are supported, coupled with their alias and class.
             <td>object</td>
             <td>sys.Object</td>
             <td>Base type that all types extend from.</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>null</td>
-            <td>sys.Null</td>
-            <td>Absence of value.</td>
             <td></td>
         </tr>
         <tr>
@@ -108,47 +103,40 @@ The following basic types are supported, coupled with their alias and class.
 
 Booleans represent either a `true` or `false` value.
 
-    bool foo = true
-    
+    foo = true
+
 ### Integers ###
 
-Integers are whole numbers that support either signed (negatives) or unsigned values (non-negatives). 
-They are represented as 4 different types -- `byte`, `short`, `int`, and `long` -- each with their own fixed length.
+Integers are whole numbers that support either signed (negatives) or unsigned values (non-negatives). They are represented as 4 different types -- `byte`, `short`, `int`, and `long` -- each with their own fixed length.
 
-    byte foo = 127
-    ushort bar = 65535
+    foo = 127
+    bar = 65535
 
 ### Floating Points ###
 
-Floating points are approximated numbers that have radix points that are of a variable size. 
-They are represented as 2 different types -- `float` and `double`.
+Floating points are approximated numbers that have radix points of a variable size. They are represented as 2 different types -- `float` and `double`.
 
-    float foo = 123.45
+    foo = 123.45
 
 ### Strings ###
 
-Strings are a sequence of zero or more Unicode characters that are initialized using single quotes. 
-They are valid UTF-8 encoded sequences.
+Strings are a sequence of zero or more Unicode characters that are initialized using single or double quotes. They are valid UTF-8 encoded sequences.
 
-    string foo = 'Hello'
+    foo = 'Hello'
 
 #### Interpolation ####
 
-Double quoted strings can be used for interpolation as well as internal expressions.
+    foo = 'World'
+    bar = "Hello #{foo}"
+    baz = "1 + 2 is #{1 + 2}"
 
-    string foo = 'World'
-    string bar = "Hello {foo}"
-    string baz = "1 + 2 is {1 + 2}"
-    
-    bar // Hello World
-    baz // 1 + 2 is 3
+#### Concatenation ####
+
+    foo = "Hello" + " World"
 
 ## Collections ##
 
-Collections are complex types that manage a set of types. When declared, they either need to use [generics](generics.md), 
-or use [type inference](#inference) via the `let` keyword.
-
-The following collection types are supported.
+Collections are complex types that manage a set of types. The following collection types are supported.
 
 <table>
     <thead>
@@ -162,12 +150,12 @@ The following collection types are supported.
         <tr>
             <td>array</td>
             <td>sys.Array</td>
-            <td>A variable length index based list.</td>
+            <td>A variable length list.</td>
         </tr>
         <tr>
             <td>tuple</td>
             <td>sys.Tuple</td>
-            <td>A fixed length ordered list.</td>
+            <td>A fixed length list.</td>
         </tr>
         <tr>
             <td>map</td>
@@ -191,71 +179,32 @@ The following collection types are supported.
 
 Arrays are variable length lists of a specific type, with indices represented as 0-based integers.
 
-    Array<int> foo = [1, 2, 3]
-    Array<string> bar = ['a', 'b', 'c']
-    
-Using arrays are pretty similar to other languages. You can add an item.
-
-    foo[] = 4
-
-Or access an item by index. If the index doesn't exist, an exception is thrown.
-
-    foo[0] // 1
-
-If an array is mutable, you can overwrite an item by index.
-
-    foo[0] = 123
-
-And a range of values (slices) can be retrieved.
-
-    foo[1:3]
-    foo[-1]
+    foo = [1, 2, 3]
+    bar = ['a', 'b', 'c']
 
 ### Tuples ###
 
-Tuples are immutable fixed length ordered lists of a specific type. Once created, they cannot be modified.
+Tuples are fixed length ordered lists of a specific type. Once created, they cannot be modified.
 
-    Tuple<byte> foo = (1, 2, 3)
-    Tuple<string> bar = ('a', 'b', 'c')
-
-Tuples only support accessing items.
-
-    bar[1] // b
+    foo = (1, 2, 3)
+    bar = ('a', 'b', 'c')
 
 ### Maps ###
 
-Maps are key-value based sets, with the key being one type, and the value being another.
-All types are usable as keys, excluding booleans.
+Maps are key-value based sets, with the key being one type, and the value being another. All types are usable as keys, excluding booleans.
 
-    Map<string, int> foo = {'a': 1, 'b': 2}
-
-Adding and setting a value on the map is the same. Uses dot notation.
-If they key is dynamic, or not alpha-numeric, use brackets.
-
-    foo.c = 3
-    foo[var] = 3
-
-Accessing a value uses the same notation.
-
-    foo.a // 1
-    foo[var]
+    foo = { 'a': 1, 'b': 2 }
 
 ### Structs ###
 
-Structs are key-value based sets where the field names are always constant and always required.
-When defining a struct, the field must by typed.
+Structs are key-value based sets where the field names are always constant and always required. When defining a struct, the field must by typed.
 
     struct Point {
-        x: int,
-        y: int
+        'x': int,
+        'y': int
     }
-    
-    Point foo = Point {x: 123, y: 456}
 
-The fields on the struct can then be accessed and set using dot notation.
-
-    foo.x = 789
-    foo.x // 789
+    foo = Point { 'x': 123, 'y': 456 }
 
 ### Enums ###
 
@@ -266,103 +215,26 @@ Enums are a set of identifiers that are always constant once declared. Identifie
         GREEN,
         BLUE
     }
-    
-    Color foo = Color.RED
 
-Values can be access using dot notation.
+    foo = Color.RED
 
-    Color.GREEN // 1
+## Annotations ##
 
-Enums are very handy in comparisons.
+By default, all variable types are inferred upon declaration. To define explicit types, we can use type annotations, which use [generics](generics.md) styled syntax.
 
-    if foo == Color.RED {
-        // ...
-    }
-
-## Type Inference ##
-
-Type inference is a concept where a variables type will be automatically deduced when the type is omitted 
-from the declaration. To use type inference, use the `let` keyword.
-
-    let foo = 123
-    let bar = {1: 'a', 2: 'b'}
-
-The previous example is equivalent to this explicit declaration.
-
-    byte foo = 123
-    Map<byte, string> bar = {1: 'a', 2: 'b'}
-
-## Mutable Modifier ##
-
-By default, all types are immutable when declared. If any mutation occurs, an exception is thrown. 
-There are 3 options for mutability. 
-
-    string foo = 'Hello'
-    foo += ' World' // INVALID
-
-The first option is to clone the value using the `clone()` method. 
-This approach will only work if used in the declaration, as the string is still being initialized.
-
-    string bar = foo.clone() + ' World' // VALID
-
-The second option is to unlock the object, which makes it mutable.
-
-    foo.unlock()
-    foo += ' World' // VALID
-
-The third option is to mark the variable as mutable during declaration, by append `!` to the type.
-
-    string! foo = 'Hello'
-    foo += ' World' // VALID
-
-The `!` can be used with any type, even the `let` keyword. Take the following examples.
-
-    let! foo = 'Hello world'
-    short! bar = -32,768
-    Array<int>! baz = [1, 2, 3]
-
-## Nullable Modifier ##
-
-Primitive types do not support nullable values while collections do. Setting a non-nullable type to null 
-will throw an exception.
-
-    Array<int> foo = null // INVALID
-
-To make a type nullable, append `?` to the type.
-
-    Array<int>? foo = null // VALID
-
-Nullable can also be paired with mutable. The order of characters don't matter.
-
-    Array<int>!? foo = [123]
-    Array<int>?! foo = [456]
+    foo<byte> = 100
+    bar<float> = 1252.42
+    baz<string> = "Hello World"
+    qux<Array<int>> = [1, 2, 3]
 
 ## Conversion ##
 
-Both implicit (expressions, etc) and explicit type conversion is supported. To manually convert a type to another,
-prepend the variable with parenthesis of the new type.
+Both implicit (expressions, etc) and explicit type conversion is supported. To manually convert a type to another, prepend the variable with parenthesis of the new type.
 
-    float x = 2.5
-    (int) x // 3
+    x = 2.5
+    y = (int) x // 3
 
-Automatic conversion also happens when a variable of one type is assigned to another variable of another type. 
-This is also known as boxing.
+Automatic conversion also happens when a variable of one type is assigned to another variable of another type. This is also known as boxing.
 
-    float x = 2.5
-    int y = x // 3
-
-## Augmenting ##
-
-Augmenting is a concept that allows the extending of built-in type classes at runtime with new methods or properties.
-
-The following example uses [package](packages.md) and [class](classes.md) syntax.
-
-    import sys.String
-    
-    augment String {
-        string wrap(string name) {
-            return "<{name}>" + this + "</{name}>"
-        }
-    }
-    
-    'Hello world'.wrap('div') // <div>Hello world</div>
+    x = 2.5
+    y<int> = x // 3
